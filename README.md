@@ -1,5 +1,7 @@
 # 📚 SmartStudy AI
 
+![Chat UI](assets/chat.png)
+
 ```md
 An AI-powered study assistant with chat-based learning, smart memory, and dynamic quiz generation.
 
@@ -17,6 +19,12 @@ Built with a focus on clarity, usability, and real learning, it combines convers
 - AI explains concepts clearly with examples
 - Detects confusion and simplifies responses automatically
 - Clean chat interface
+
+
+### Screenshots
+![Chat UI](assets/chat.png)
+![Quiz UI](assets/quiz.png)
+ ![Result](assets/quiz2.png)
 
 ### Smart Chat Memory
 - Multiple chats supported
