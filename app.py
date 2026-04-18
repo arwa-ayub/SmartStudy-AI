@@ -51,29 +51,46 @@ def generate_chat_title(text):
             text = text[len(p):]
     return text[:30].capitalize()
 
-
+# ===============================
+# 🧠 GENERATE MCQ QUIZ FUNCTION
+# ===============================
 def generate_mcq_quiz(topic, num):
-    prompt = f"""
-Generate {num} MCQs about {topic}.
-Return ONLY JSON.
+    try:
+        prompt = f"""
+        Generate {num} multiple choice questions on the topic: {topic}
 
-[
-  {{
-    "question": "...",
-    "options": ["A","B","C","D"],
-    "correct_answer": "...",
-    "reason": "..."
-  }}
-]
-"""
-    res = client.chat.completions.create(
-        model="llama-3.1-8b-instant",
-        messages=[{"role": "user", "content": prompt}]
-    )
+        Rules:
+        - Each question must have 4 options
+        - Only 1 correct answer
+        - Include a short reason for the correct answer
+        - Return ONLY JSON format like below:
 
-    raw = res.choices[0].message.content.strip()
-    raw = raw.replace("```json", "").replace("```", "")
-    return json.loads(raw)
+        [
+          {{
+            "question": "Question here",
+            "options": ["Option A", "Option B", "Option C", "Option D"],
+            "correct_answer": "Option A",
+            "reason": "Explanation here"
+          }}
+        ]
+        """
+
+        res = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[{"role": "user", "content": prompt}]
+        )
+
+        data = res.choices[0].message.content.strip()
+
+        # clean response
+        data = data.replace("```json", "").replace("```", "").strip()
+
+        return json.loads(data)
+
+    except Exception as e:
+        st.error(f"Quiz generation failed: {e}")
+        return []
+
 
 # =============================
 # 📂 SIDEBAR
@@ -144,7 +161,9 @@ if mode == "Chat":
         st.rerun()
 
 
-# 👇 IMPORTANT — THIS MUST BE AFTER CHAT BLOCK
+# ===============================
+# 🧪 QUIZ MODE UI
+# ===============================
 elif mode == "Quiz":
 
     st.title("🧪 Quiz Generator")
@@ -152,8 +171,50 @@ elif mode == "Quiz":
     topic = st.text_input("Topic")
     num = st.slider("Number of questions", 1, 20, 5)
 
+    # initialize session state
+    if "quiz_data" not in st.session_state:
+        st.session_state.quiz_data = []
+
+    if "quiz_answers" not in st.session_state:
+        st.session_state.quiz_answers = {}
+
+    if "quiz_checked" not in st.session_state:
+        st.session_state.quiz_checked = {}
+
+    # generate quiz
     if st.button("Generate Quiz") and topic:
         st.session_state.quiz_data = generate_mcq_quiz(topic, num)
+        st.session_state.quiz_answers = {}
+        st.session_state.quiz_checked = {}
 
+    # display quiz
     for i, q in enumerate(st.session_state.quiz_data):
+
         st.markdown(f"### Q{i+1}: {q['question']}")
+
+        # user selects option
+        choice = st.radio(
+            "Select answer",
+            q["options"],
+            key=f"radio_{i}"
+        )
+
+        st.session_state.quiz_answers[i] = choice
+
+        # check button
+        if st.button("Check", key=f"check_{i}"):
+
+            st.session_state.quiz_checked[i] = True
+
+        # show result AFTER checking
+        if st.session_state.quiz_checked.get(i):
+
+            if st.session_state.quiz_answers[i] == q["correct_answer"]:
+                st.success("Correct ✅")
+            else:
+                st.error("Wrong ❌")
+
+            st.info(f"Answer: {q['correct_answer']}")
+            st.write(f"Reason: {q['reason']}")
+
+        st.divider()    
