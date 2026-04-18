@@ -5,8 +5,6 @@ from groq import Groq
 import json
 import re
 
-load_dotenv()
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 # =============================
 # 🔐 LOAD ENV
@@ -118,8 +116,8 @@ with st.sidebar:
 
 # =============================
 # 💬 CHAT MODE
-# =============================
 if mode == "Chat":
+    
     messages = st.session_state.conversations[st.session_state.current_chat]
 
     if not messages:
@@ -136,45 +134,26 @@ if mode == "Chat":
     if user_input:
         messages.append({"role": "user", "content": user_input})
 
-        if st.session_state.current_chat == "New Chat":
-            title = generate_chat_title(user_input)
-            st.session_state.conversations[title] = st.session_state.conversations.pop("New Chat")
-            st.session_state.current_chat = title
-            messages = st.session_state.conversations[title]
-
-        system_prompt = "Explain simply with example" if detect_confusion(user_input) > 2 else "Explain clearly"
-
         res = client.chat.completions.create(
             model="llama-3.1-8b-instant",
-            messages=[{"role": "system", "content": system_prompt}] + messages
+            messages=messages
         )
 
         reply = res.choices[0].message.content
         messages.append({"role": "assistant", "content": reply})
         st.rerun()
 
-# =============================
-# 🧪 QUIZ MODE
-# =============================
-else:
+
+# 👇 IMPORTANT — THIS MUST BE AFTER CHAT BLOCK
+elif mode == "Quiz":
+
     st.title("🧪 Quiz Generator")
 
     topic = st.text_input("Topic")
-    num = st.slider("Number of questions", 3, 20, 5)
+    num = st.slider("Number of questions", 1, 20, 5)
 
     if st.button("Generate Quiz") and topic:
         st.session_state.quiz_data = generate_mcq_quiz(topic, num)
 
     for i, q in enumerate(st.session_state.quiz_data):
         st.markdown(f"### Q{i+1}: {q['question']}")
-
-        choice = st.radio("Select answer", q["options"], key=f"q{i}")
-
-        if st.button("Check", key=f"check{i}"):
-            if choice == q["correct_answer"]:
-                st.success("Correct ✅")
-            else:
-                st.error("Wrong ❌")
-
-            st.info(f"Answer: {q['correct_answer']}")
-            st.write("Reason:", q["reason"])
