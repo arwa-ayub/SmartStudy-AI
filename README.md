@@ -2,23 +2,40 @@
 
 ![Chat UI](assets/chat.png)
 
-
-An AI-powered study assistant with chat-based learning, smart memory, and dynamic quiz generation.
-
-
-SmartStudy AI is an interactive AI-powered study assistant designed to help students understand concepts, ask questions, and test their knowledge through dynamically generated quizzes.
-
-Built with a focus on clarity, usability, and real learning, it combines conversational AI with structured assessment to create a smarter study experience.
+An AI-powered study assistant that combines conversational learning with dynamic quiz generation — built for clarity, speed, and real understanding.
 
 ---
+
+## Overview
+
+SmartStudy AI is an interactive learning platform where students can:
+
+Ask questions naturally (like ChatGPT)
+Get clear, structured explanations
+Practice with automatically generated quizzes
+Track multiple study sessions through chat history
+
 
 ## Features
 
 ### AI Chat Assistant
 - Ask questions in natural language
-- AI explains concepts clearly with examples
-- Detects confusion and simplifies responses automatically
-- Clean chat interface
+- Clear, structured explanations (not vague AI replies)
+- Adapts tone based on question complexity
+- Supports user-defined language (English by default)
+
+## Smart Chat Memory
+-Multiple chats 
+-Auto-generated chat titles based on first question
+-Rename / delete chats
+-Smooth sidebar navigation
+-Hover-based controls (clean UX — no clutter)
+
+## Dynamic Quiz Generator
+-Generate quizzes on any topic
+-Select:
+-Number of questions
+-Difficulty (Easy / Medium / Hard)
 
 
 ### Screenshots
@@ -30,25 +47,30 @@ Built with a focus on clarity, usability, and real learning, it combines convers
 
  ![Result](assets/quiz2.png)
 
-### Smart Chat Memory
-- Multiple chats supported
-- Each chat is automatically named based on your first question
-- Rename or delete chats anytime
-- Sidebar-based navigation for easy access
+ ## Live Demo
+ 👉 https://arwaayub-smartstudy.streamlit.app/
 
-### Quiz Generator
-- Generate MCQ quizzes on any topic
-- Choose number of questions dynamically
-- Each question includes:
-  - 4 options
-  - 1 correct answer
-  - Explanation with reasoning
-
-### Chat Management
-- Create new chats
-- Rename chats
-- Delete chats
-- Organized conversation flow
+## Project structure
+SMARTSTUDY-AI/
+│
+├── app.py                 # Main entry point
+│
+├── core/                 # Core logic
+│   ├── llm.py            # AI communication (Groq API)
+│   ├── state.py          # Session state handling
+│   └── utils.py          # Helpers (cleaning, formatting)
+│
+├── features/             # App features
+│   ├── chat.py           # Chat system
+│   └── quiz.py           # Quiz system
+│
+├── ui/                   # UI components
+│   ├── sidebar.py        # Sidebar + chat history
+│   └── styles.py         # Custom styling
+│
+├── assets/               # Images
+├── requirements.txt
+└── README.md
 
 ---
 
@@ -82,4 +104,14 @@ GROQ_API_KEY=your_api_key_here
 ⚠️ Do NOT upload this file to GitHub.
 
 ### 5.Run the application
-streamlit run app.py
+streamlit run app.py'''
+
+
+
+## Future Improvements
+User authentication (login system)
+Progress tracking dashboard
+Save quiz results history
+PDF / notes export
+Voice input & response
+Mobile optimization
