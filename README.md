@@ -10,10 +10,10 @@ An AI-powered study assistant that combines conversational learning with dynamic
 
 SmartStudy AI is an interactive learning platform where students can:
 
-Ask questions naturally (like ChatGPT)
-Get clear, structured explanations
-Practice with automatically generated quizzes
-Track multiple study sessions through chat history
+- Ask questions naturally (like ChatGPT)
+- Get clear, structured explanations
+- Practice with automatically generated quizzes
+- Track multiple study sessions through chat history
 
 
 ## Features
@@ -104,6 +104,7 @@ GROQ_API_KEY=your_api_key_here
 ⚠️ Do NOT upload this file to GitHub.
 
 ### 5.Run the application
+```bash
 streamlit run app.py
 
 
