@@ -25,17 +25,17 @@ Track multiple study sessions through chat history
 - Supports user-defined language (English by default)
 
 ## Smart Chat Memory
--Multiple chats 
--Auto-generated chat titles based on first question
--Rename / delete chats
--Smooth sidebar navigation
--Hover-based controls (clean UX — no clutter)
+- Multiple chats 
+- Auto-generated chat titles based on first question
+- Rename / delete chats
+- Smooth sidebar navigation
+- Hover-based controls (clean UX — no clutter)
 
 ## Dynamic Quiz Generator
--Generate quizzes on any topic
--Select:
--Number of questions
--Difficulty (Easy / Medium / Hard)
+- Generate quizzes on any topic
+- Select:
+- Number of questions
+- Difficulty (Easy / Medium / Hard)
 
 
 ### Screenshots
@@ -45,7 +45,7 @@ Track multiple study sessions through chat history
 
 ![Quiz UI](assets/quiz.png)
 
- ![Result](assets/quiz2.png)
+![Result](assets/quiz2.png)
 
  ## Live Demo
  👉 https://arwaayub-smartstudy.streamlit.app/
@@ -104,7 +104,7 @@ GROQ_API_KEY=your_api_key_here
 ⚠️ Do NOT upload this file to GitHub.
 
 ### 5.Run the application
-streamlit run app.py'''
+streamlit run app.py
 
 
 
