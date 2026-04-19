@@ -50,27 +50,6 @@ SmartStudy AI is an interactive learning platform where students can:
  ## Live Demo
  👉 https://arwaayub-smartstudy.streamlit.app/
 
-## Project structure
-SMARTSTUDY-AI/
-│
-├── app.py                 # Main entry point
-│
-├── core/                 # Core logic
-│   ├── llm.py            # AI communication (Groq API)
-│   ├── state.py          # Session state handling
-│   └── utils.py          # Helpers (cleaning, formatting)
-│
-├── features/             # App features
-│   ├── chat.py           # Chat system
-│   └── quiz.py           # Quiz system
-│
-├── ui/                   # UI components
-│   ├── sidebar.py        # Sidebar + chat history
-│   └── styles.py         # Custom styling
-│
-├── assets/               # Images
-├── requirements.txt
-└── README.md
 
 ---
 
