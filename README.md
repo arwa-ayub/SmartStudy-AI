@@ -24,6 +24,8 @@ Built with a focus on clarity, usability, and real learning, it combines convers
 ### Screenshots
 ![Chat UI](assets/chat1.png)
 
+![Quiz UI](assets/quiz0.png)
+
 ![Quiz UI](assets/quiz.png)
 
  ![Result](assets/quiz2.png)
