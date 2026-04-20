@@ -82,11 +82,14 @@ GROQ_API_KEY=your_api_key_here
 
 ⚠️ Do NOT upload this file to GitHub.
 
-### 5.Run the application
+
+---
+
+```md
+### 5. Run the application
+
 ```bash
 streamlit run app.py
-
-
 
 ## Future Improvements
 User authentication (login system)
