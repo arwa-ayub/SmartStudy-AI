@@ -93,8 +93,13 @@ streamlit run app.py
 
 ## Future Improvements
 -User authentication (login system)
+
 -Progress tracking dashboard
+
 -Save quiz results history
+
 -PDF / notes export
+
 -Voice input & response
+
 -Mobile optimization
